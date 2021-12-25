@@ -18,7 +18,7 @@ import shutil
 def make_path():
     path = bpy.data.filepath
     path = os.path.dirname(path)
-    path = os.path.join( path , "clipboard")
+    path = os.path.join( path, bpy.data.filepath.split('\\')[-1:][0].split('.')[0] + " clipboard")
     return path
 
 class CleanImages(bpy.types.Operator):
@@ -32,7 +32,10 @@ class CleanImages(bpy.types.Operator):
         scene = context.scene
         scene.my_tool.int_value = 0
         
-        
+        if not bpy.data.is_saved:
+            self.report({'INFO'}, "blend File is not saved" )    
+            return {'FINISHED'}
+            
         folder = make_path()
         
         if os.path.exists(folder):
@@ -48,7 +51,8 @@ class CleanImages(bpy.types.Operator):
                     self.report({'INFO'}, 'Failed to delete %s. Reason: %s' % (file_path, e))
             
                 os.rmdir(folder)
-            
+        else:
+            self.report({'INFO'}, "Nothing to be cleaned" )               
         return {'FINISHED'}
         
 
@@ -69,6 +73,11 @@ class Add_ClipBoard(bpy.types.Operator):
 
     def execute(self, context):
         
+        if not bpy.data.is_saved:
+            self.report({'INFO'}, "you should Save the current blend file first")
+            return {'FINISHED'}  
+        
+                 
         layout = self.layout
         scene = context.scene
         my_prop_tool = scene.my_tool
