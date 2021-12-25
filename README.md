@@ -26,4 +26,4 @@ location to this add on is `View3D > Sidebar > Add_Image` panel
 this will save all images added to the scene next to your blend file so make sure to **save your blend file** 
 
 ### Screen Shots:
-![panel location](Screen%20Shot/panel%20location.jpg)
+![panel location](Screen%20Shot/panel%20location.JPG)
