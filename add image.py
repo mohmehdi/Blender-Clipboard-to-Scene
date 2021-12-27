@@ -83,7 +83,7 @@ class Add_ClipBoard(bpy.types.Operator):
         scene = context.scene
         my_prop_tool = scene.my_tool
         index = my_prop_tool.int_value
-        
+        scale = my_prop_tool.int_scale
 
         image = ImageGrab.grabclipboard()
         if image:
@@ -94,7 +94,8 @@ class Add_ClipBoard(bpy.types.Operator):
             
             image.save(path, 'JPEG')        
             bpy.ops.import_image.to_plane(files=[{"name":file_name, }], directory=self.image_path, align_axis='CAM')
-           
+            bpy.context.view_layer.objects.active.scale = (scale, scale, scale)
+            
             scene.my_tool.int_value+=1
             
             self.report({'INFO'}, f"added {path}")
@@ -116,16 +117,21 @@ class Add_Image_Panel(bpy.types.Panel):
         row = layout.row()
         row.scale_y = 2
         row.operator(Add_ClipBoard.bl_idname,text="Add Clipboard Image",icon="IMAGE_DATA")
-         
-        new_row = layout.row()
-            
-        new_row.operator(CleanImages.bl_idname,text="Clean",icon="TRASH")
-        new_row.prop(my_prop_tool,"int_value")
+        
+        row = layout.row()
+        
+        row.prop(my_prop_tool,"int_scale")    
+        
+        row = layout.row()
+        
+        row.operator(CleanImages.bl_idname,text="Clean",icon="TRASH")
+        row.prop(my_prop_tool,"int_value")
         
          
         
 class MyProperty(bpy.types.PropertyGroup):
     int_value = bpy.props.IntProperty(name="index",min=0,max=200)
+    int_scale = bpy.props.FloatProperty(name="Scale",min=1.0,max=100)
     
 
 
