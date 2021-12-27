@@ -41,16 +41,17 @@ class CleanImages(bpy.types.Operator):
         if os.path.exists(folder):
             for filename in os.listdir(folder):
                 file_path = os.path.join(folder, filename)
+
                 try:
                     if os.path.isfile(file_path) or os.path.islink(file_path):
-                        os.unlink(file_path)
+                        os.unlink(file_path)  
                     elif os.path.isdir(file_path):
                         shutil.rmtree(file_path)
                 except Exception as e:
-                    print()            
+         
                     self.report({'INFO'}, 'Failed to delete %s. Reason: %s' % (file_path, e))
             
-                os.rmdir(folder)
+            os.rmdir(folder)
         else:
             self.report({'INFO'}, "Nothing to be cleaned" )               
         return {'FINISHED'}
@@ -92,7 +93,7 @@ class Add_ClipBoard(bpy.types.Operator):
             path = os.path.join( self.image_path , file_name )
             
             image.save(path, 'JPEG')        
-            bpy.ops.import_image.to_plane(files=[{"name":file_name, }], directory=self.image_path, align_axis='Z+')
+            bpy.ops.import_image.to_plane(files=[{"name":file_name, }], directory=self.image_path, align_axis='CAM')
            
             scene.my_tool.int_value+=1
             
