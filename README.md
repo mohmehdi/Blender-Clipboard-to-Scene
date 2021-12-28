@@ -16,7 +16,7 @@ _There is also an option to delete the folder_
 ## How to Install:  
 
 1. Add [PIL or pillow](https://pillow.readthedocs.io/en/stable/) to your Blender folder here: `C:\Program Files\Blender Foundation\Blender 2.91\2.91\python\lib` or in `\scripts\modules`     
-2. go to Edit-> Prefrences -> Add-ons and click install then select the `add image.py` file
+2. go to Edit-> Preferences -> Add-ons and click install then select the `add image.py` file
 3. enable  the add on
 4. well, first you need to download all of those things 
 
