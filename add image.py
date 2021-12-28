@@ -92,6 +92,7 @@ class Add_ClipBoard(bpy.types.Operator):
             file_name = self.file_name+str(  index  ) +  self.type
             path = os.path.join( self.image_path , file_name )
             
+            image = image.convert('RGB')
             image.save(path, 'JPEG')        
             bpy.ops.import_image.to_plane(files=[{"name":file_name, }], directory=self.image_path, align_axis='CAM')
             bpy.context.view_layer.objects.active.scale = (scale, scale, scale)
@@ -153,4 +154,4 @@ def unregister():
     del bpy.types.Scene.my_tool
         
 #if __name__ == "__main__":
-#    register()
+ #   register()
