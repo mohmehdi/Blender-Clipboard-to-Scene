@@ -1,12 +1,5 @@
 ### Blender Clipboard to Scene
 
-
----
-
-**It doesn't work with version 2.93 and higher**  
-(I tested it on 2.91 and 2.83)  
-There is an issue with importing the Pillow module 
-
 ---
 
 ### What does this do:
@@ -15,10 +8,10 @@ _There is also an option to delete the folder_
 
 ## How to Install:  
 
-1. Add [PIL or pillow](https://pillow.readthedocs.io/en/stable/) to your Blender folder here: `C:\Program Files\Blender Foundation\Blender 2.91\2.91\python\lib` or in `\scripts\modules`     
-2. go to Edit-> Preferences -> Add-ons and click install then select the `add image.py` file
-3. enable  the add on
-4. well, first you need to download all of those things 
+1. install Pillow with your blender python located in `Blender Foundation\Blender 2.91\2.91\python\bin` and run this `python.exe -m pip install Pillow --upgrade` with it     
+2. go to Edit-> Preferences -> Add-ons enable `Import-Export Images as Planes` which is a blender built-in add-on
+3. go to Edit-> Preferences -> Add-ons and click install then select the `add image.py` file
+4. enable  the add on
 
 ### How to Use this:
 ::in order to use this add-on you need to enable blenders built in `Import Images as Planes` add-on first::  
