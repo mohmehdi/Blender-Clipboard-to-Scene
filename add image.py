@@ -1,7 +1,7 @@
 bl_info = {
     "name": "ClipBoard to Scene",
     "author": "mohmehdi",
-    "version": (1, 0),
+    "version": (1, 1),
     "blender": (2, 80, 0),
     "location": "View3D > Sidebar > My own addon",
     "description": "adds an image to scene from clipboard",
@@ -93,9 +93,17 @@ class Add_ClipBoard(bpy.types.Operator):
             path = os.path.join( self.image_path , file_name )
             
             image = image.convert('RGB')
-            image.save(path, 'JPEG')        
+            image.save(path, 'JPEG')  
+            
+            last_activated_object = bpy.context.view_layer.objects.active
+            current_mode = bpy.context.object.mode
+                  
             bpy.ops.import_image.to_plane(files=[{"name":file_name, }], directory=self.image_path, align_axis='CAM')
             bpy.context.view_layer.objects.active.scale = (scale, scale, scale)
+            
+            bpy.ops.object.select_all(action='DESELECT')
+            bpy.context.view_layer.objects.active = last_activated_object
+            bpy.ops.object.mode_set ( mode = current_mode )
             
             scene.my_tool.int_value+=1
             
