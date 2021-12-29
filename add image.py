@@ -96,14 +96,17 @@ class Add_ClipBoard(bpy.types.Operator):
             image.save(path, 'JPEG')  
             
             last_activated_object = bpy.context.view_layer.objects.active
-            current_mode = bpy.context.object.mode
+            if bpy.context.object is not None:
+                current_mode = bpy.context.object.mode
                   
             bpy.ops.import_image.to_plane(files=[{"name":file_name, }], directory=self.image_path, align_axis='CAM')
             bpy.context.view_layer.objects.active.scale = (scale, scale, scale)
             
             bpy.ops.object.select_all(action='DESELECT')
-            bpy.context.view_layer.objects.active = last_activated_object
-            bpy.ops.object.mode_set ( mode = current_mode )
+            
+            if last_activated_object is not None:
+                bpy.context.view_layer.objects.active = last_activated_object
+                bpy.ops.object.mode_set ( mode = current_mode )
             
             scene.my_tool.int_value+=1
             
