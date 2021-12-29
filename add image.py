@@ -152,5 +152,5 @@ def unregister():
     
     del bpy.types.Scene.my_tool
         
-if __name__ == "__main__":
-     register()
+#if __name__ == "__main__":
+#     register()
