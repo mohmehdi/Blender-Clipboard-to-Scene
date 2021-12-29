@@ -120,7 +120,6 @@ class Add_Image_Panel(bpy.types.Panel):
         row.operator(Add_ClipBoard.bl_idname,text="Add Clipboard Image",icon="IMAGE_DATA")
         
         row = layout.row()
-        
         row.prop(my_prop_tool,"int_scale")    
         
         row = layout.row()
@@ -131,8 +130,8 @@ class Add_Image_Panel(bpy.types.Panel):
          
         
 class MyProperty(bpy.types.PropertyGroup):
-    int_value = bpy.props.IntProperty(name="index",min=0,max=200)
-    int_scale = bpy.props.FloatProperty(name="Scale",min=1.0,max=100)
+    int_value:bpy.props.IntProperty(name="index",min=0,max=200,default=0)
+    int_scale:bpy.props.FloatProperty(name="Scale",min=1.0,max=100,default=1.0)
     
 
 
@@ -153,5 +152,5 @@ def unregister():
     
     del bpy.types.Scene.my_tool
         
-#if __name__ == "__main__":
- #   register()
+if __name__ == "__main__":
+     register()
